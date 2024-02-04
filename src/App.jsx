@@ -1,8 +1,9 @@
+import MainContainer from "./MainContainer"
 
 function App() {
 
   return (
-    <div>Hello R3F!</div>
+    <MainContainer />
   )
 }
 
