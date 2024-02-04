@@ -7,13 +7,16 @@ import { Canvas } from '@react-three/fiber';
 
 const MainContainer = () => {
     const directionalLightRef = useRef();
+    const directionalLightRefTwo = useRef();
     useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1, 'hotpink');
+    useHelper(directionalLightRefTwo, THREE.DirectionalLightHelper, 1, 'hotpink');
     return (
             <>
                 <color attach="background" args={['black']} />
                 <OrbitControls />
                 <AnimatedStars />
-                <directionalLight ref={directionalLightRef} />
+                <directionalLight ref={directionalLightRef} position={[0,0,10]} intensity={1}/>
+                <directionalLight ref={directionalLightRefTwo} position={[0,0,-10]}/>
                 <Earth />
             </>
     );
