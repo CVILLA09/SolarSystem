@@ -1,4 +1,4 @@
-import { OrbitControls, useHelper } from '@react-three/drei';
+import { useHelper } from '@react-three/drei';
 import AnimatedStars from './AnimatedStars';
 import { useRef } from 'react';
 import Earth from './Earth';
@@ -12,18 +12,17 @@ const MainContainer = () => {
     return (
             <>
                 <color attach="background" args={['black']} />
-                <OrbitControls />
                 <AnimatedStars />
-                <directionalLight 
+                {/* <directionalLight 
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
                 intensity={3}/>
                 <directionalLight 
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
-                intensity={3}/>
-                 {/*<ambientLight intensity={5} />*/}
-                <Earth />
+                intensity={3}/> */}
+                <ambientLight intensity={5} />
+                <Earth displacementScale={0.15}/>
             </>
     );
 }
