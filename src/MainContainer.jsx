@@ -18,11 +18,11 @@ const MainContainer = () => {
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
                 intensity={3}/>
-                {/* <directionalLight 
+                <directionalLight 
                 castShadow
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
-                intensity={3}/> */}
+                intensity={3}/>
                 {/* <ambientLight intensity={5} /> */}
                 <Earth displacementScale={0.03}/>
             </>
