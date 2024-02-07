@@ -20,7 +20,7 @@ const Earth = ({ displacementScale }) => {
 
   return (
     <group>
-    <mesh ref={earthRef} position={[0,0,0]}>
+    <mesh receiveShadow ref={earthRef} position={[0,0,0]}>
         {/* Radius, X-axis, Y-axis  */}
         <sphereGeometry args={[1, 64, 64]} />
           <meshPhongMaterial 

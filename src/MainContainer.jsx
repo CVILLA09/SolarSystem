@@ -14,10 +14,12 @@ const MainContainer = () => {
                 <color attach="background" args={['black']} />
                 <AnimatedStars />
                 <directionalLight 
+                castShadow
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
                 intensity={3}/>
                 <directionalLight 
+                castShadow
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
                 intensity={3}/>
