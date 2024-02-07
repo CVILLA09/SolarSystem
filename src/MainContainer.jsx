@@ -3,7 +3,6 @@ import AnimatedStars from './AnimatedStars';
 import { useRef } from 'react';
 import Earth from './Earth';
 import * as THREE from 'three';
-import { Canvas } from '@react-three/fiber';
 
 const MainContainer = () => {
     const directionalLightRef = useRef();
@@ -15,8 +14,15 @@ const MainContainer = () => {
                 <color attach="background" args={['black']} />
                 <OrbitControls />
                 <AnimatedStars />
-                <directionalLight ref={directionalLightRef} position={[0,0,10]} intensity={1}/>
-                <directionalLight ref={directionalLightRefTwo} position={[0,0,-10]}/>
+                {/* <directionalLight 
+                ref={directionalLightRef} 
+                position={[0,0,10]} 
+                intensity={2}/>
+                <directionalLight 
+                ref={directionalLightRefTwo} 
+                position={[0,0,-10]} 
+                intensity={2}/> */}
+                <ambientLight intensity={0,5} />
                 <Earth />
             </>
     );
