@@ -14,15 +14,15 @@ const MainContainer = () => {
                 <color attach="background" args={['black']} />
                 <OrbitControls />
                 <AnimatedStars />
-                {/* <directionalLight 
+                <directionalLight 
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
-                intensity={2}/>
+                intensity={3}/>
                 <directionalLight 
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
-                intensity={2}/> */}
-                <ambientLight intensity={5} />
+                intensity={3}/>
+                 {/*<ambientLight intensity={5} />*/}
                 <Earth />
             </>
     );
