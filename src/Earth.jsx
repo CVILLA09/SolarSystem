@@ -1,6 +1,7 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import Moon from "./Moon";
 
 const Earth = ({ displacementScale }) => {
   const earthRef = useRef()
@@ -18,7 +19,8 @@ const Earth = ({ displacementScale }) => {
     })
 
   return (
-    <mesh ref={earthRef}>
+    <group>
+    <mesh ref={earthRef} position={[0,0,0]}>
         {/* Radius, X-axis, Y-axis  */}
         <sphereGeometry args={[1, 64, 64]} />
           <meshPhongMaterial 
@@ -30,6 +32,8 @@ const Earth = ({ displacementScale }) => {
           displacementScale={displacementScale}
           />
     </mesh>
+    <Moon />
+    </group>
   );
 }
 
