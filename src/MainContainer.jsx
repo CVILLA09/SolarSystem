@@ -24,7 +24,7 @@ const MainContainer = () => {
                 position={[0,0,-10]} 
                 intensity={3}/>
                 {/* <ambientLight intensity={5} /> */}
-                <Earth displacementScale={0.1}/>
+                <Earth displacementScale={0.02}/>
             </>
     );
 }
