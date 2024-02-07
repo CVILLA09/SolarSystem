@@ -13,16 +13,16 @@ const MainContainer = () => {
             <>
                 <color attach="background" args={['black']} />
                 <AnimatedStars />
-                {/* <directionalLight 
+                <directionalLight 
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
                 intensity={3}/>
                 <directionalLight 
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
-                intensity={3}/> */}
-                <ambientLight intensity={5} />
-                <Earth displacementScale={0.15}/>
+                intensity={3}/>
+                {/* <ambientLight intensity={5} /> */}
+                <Earth displacementScale={0.1}/>
             </>
     );
 }

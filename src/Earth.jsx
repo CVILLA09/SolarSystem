@@ -20,11 +20,12 @@ const Earth = ({ displacementScale }) => {
   return (
     <mesh ref={earthRef}>
         {/* Radius, X-axis, Y-axis  */}
-        <sphereGeometry args={[1, 32, 32]} />
+        <sphereGeometry args={[1, 64, 64]} />
           <meshPhongMaterial 
           map={earthTexture} 
           normalMap={earthNormalMap} 
-          specularMap={earthSpecularMap} 
+          specularMap={earthSpecularMap}
+          shininess={1000} 
           displacementMap={earthDisplacementMap}
           displacementScale={displacementScale}
           />
