@@ -7,18 +7,22 @@ const Sun = () => {
 
     const [sunTexture] = useTexture(['/assets/sun.jpg']);
 
-    const xAxis = 0
     useFrame (() => {
       // Axis Rotation 
       sunRef.current.rotation.y -= 0.001
     })
 
   return (
-    <mesh castShadow ref={sunRef} position={[xAxis,0,0]}>
+    <mesh ref={sunRef} position={[0,0,0]}>
         {/* Radius, X-axis, Y-axis  */}
-        <sphereGeometry args={[2, 32, 32]} />
-          <meshPhongMaterial map={sunTexture} />
-          <pointLight castShadow intensity={2} />
+        <sphereGeometry args={[1.5, 32, 32]} />
+          <meshPhongMaterial 
+          map={sunTexture} 
+          emissiveMap={sunTexture} 
+          emissiveIntensity={0.6} 
+          emissive={0xffffff} 
+          />
+          <pointLight castShadow />
     </mesh>
   );
 }
