@@ -22,6 +22,9 @@ const Moon = () => {
         <sphereGeometry args={[0.27, 32, 32]} />
           <meshPhongMaterial 
           map={moonTexture} 
+          emissiveMap={moonTexture}
+          emissive={0xffffff}
+          emissiveIntensity={0.05}
           />
     </mesh>
   );
