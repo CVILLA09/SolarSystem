@@ -1,7 +1,8 @@
 import { useHelper } from '@react-three/drei';
 import AnimatedStars from './AnimatedStars';
 import { useRef } from 'react';
-import Earth from './Earth';
+import Earth from './scenes/earth/Earth';
+import Sun from './scenes/sun/Sun';
 import * as THREE from 'three';
 
 const MainContainer = () => {
@@ -24,6 +25,7 @@ const MainContainer = () => {
                 position={[0,0,-10]} 
                 intensity={3}/>
                 {/* <ambientLight intensity={5} /> */}
+                <Sun />
                 <Earth displacementScale={0.03}/>
             </>
     );
