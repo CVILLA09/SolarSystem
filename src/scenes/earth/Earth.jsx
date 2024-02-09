@@ -25,7 +25,7 @@ const Earth = ({ displacementScale }) => {
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
-      earthRef.current.rotation.y += 0.002
+      earthRef.current.rotation.y += 0.01
       earthPositionRef.current = earthRef.current.position;
     })
 

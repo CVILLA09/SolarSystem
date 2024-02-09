@@ -10,8 +10,8 @@ const Moon = () => {
     const xAxis = 4
     useFrame (({clock}) => {
       // Orbit Rotation
-      moonRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.2) * xAxis
-      moonRef.current.position.z = Math.cos(clock.getElapsedTime() * 0.2) * xAxis
+      moonRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.4) * xAxis
+      moonRef.current.position.z = Math.cos(clock.getElapsedTime() * 0.4) * xAxis
       // Axis Rotation 
       moonRef.current.rotation.y += 0.001
     })

@@ -11,8 +11,8 @@ const ISS = () => {
     const xAxis = 2
     useFrame (({clock}) => {
         // Orbit Rotation
-        ISSRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.4) * xAxis
-        ISSRef.current.position.z = Math.cos(clock.getElapsedTime() * 0.4) * xAxis
+        ISSRef.current.position.x = Math.sin(clock.getElapsedTime() * 1.2) * xAxis
+        ISSRef.current.position.z = Math.cos(clock.getElapsedTime() * 1.2) * xAxis
       })
 
     return(

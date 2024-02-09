@@ -15,16 +15,16 @@ const Sun = () => {
   return (
     <mesh ref={sunRef} position={[0,0,0]}>
         {/* Radius, X-axis, Y-axis  */}
-        <sphereGeometry args={[1.5, 32, 32]} />
+        <sphereGeometry args={[2, 32, 32]} />
           <meshPhongMaterial 
           map={sunTexture} 
           emissiveMap={sunTexture} 
-          emissiveIntensity={0.6} 
+          emissiveIntensity={0.5} 
           emissive={0xffffff} 
           />
           <pointLight
             color={0xffffff}        // Specify the color of the light (optional)
-            intensity={20}           // Set the intensity of the light (optional)
+            intensity={25}           // Set the intensity of the light (optional)
             distance={100}           // Set the maximum range of the light (optional)
             decay={1}               // Set the amount the light dims along the distance (optional)
             position={[0, 0, 0]}    // Set the position of the light (optional)
