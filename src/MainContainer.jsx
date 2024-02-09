@@ -1,9 +1,9 @@
 import { useHelper } from '@react-three/drei';
 import AnimatedStars from './AnimatedStars';
 import { useRef } from 'react';
+import * as THREE from 'three';
 import Earth from './scenes/earth/Earth';
 import Sun from './scenes/sun/Sun';
-import * as THREE from 'three';
 
 const MainContainer = () => {
     const directionalLightRef = useRef();
@@ -18,12 +18,12 @@ const MainContainer = () => {
                 castShadow
                 ref={directionalLightRef} 
                 position={[0,0,10]} 
-                intensity={3}/> */}
+                intensity={3}/>
                 <directionalLight 
                 castShadow
                 ref={directionalLightRefTwo} 
                 position={[0,0,-10]} 
-                intensity={3}/>
+                intensity={3}/> */}
                 {/* <ambientLight intensity={5} /> */}
                 <Sun />
                 <Earth displacementScale={0.03}/>
