@@ -17,9 +17,8 @@ const Sun = () => {
     <mesh castShadow ref={sunRef} position={[xAxis,0,0]}>
         {/* Radius, X-axis, Y-axis  */}
         <sphereGeometry args={[2, 32, 32]} />
-          <meshPhongMaterial 
-          map={sunTexture} 
-          />
+          <meshPhongMaterial map={sunTexture} />
+          <pointLight castShadow intensity={2} />
     </mesh>
   );
 }
