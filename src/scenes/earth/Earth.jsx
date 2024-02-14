@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import Moon from "./Moon";
 import ISS from "./ISS";
 
@@ -9,6 +9,7 @@ import * as THREE from 'three';
 const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
   const earthPositionRef = useRef(new THREE.Vector3(12, 0, 0)); // Create a referenfe to Earth's position vector
+  const clockRef = useRef(new THREE.Clock());
 
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
     useTexture([
@@ -19,16 +20,18 @@ const Earth = React.memo (({ displacementScale }) => {
       '/assets/earth_night.jpg'
     ]);
 
-    useFrame (({clock}) => {
+    const updateEarthPosition = useCallback(() => {
       // Calculate the Earth's position based on its angle from the Sun
-      const angle = clock.getElapsedTime() * 0.4;
+      const angle = clockRef.getElapsedTime() * 0.4;
       const distance = 12;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
       earthRef.current.rotation.y += 0.01
       earthPositionRef.current = earthRef.current.position;
-    })
+    }, [])
+
+    useFrame (() => {updateEarthPosition()})
 
   return (
     <group ref={earthRef}>
