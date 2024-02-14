@@ -1,12 +1,12 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Moon from "./Moon";
 import ISS from "./ISS";
 
 import * as THREE from 'three';
 
-const Earth = ({ displacementScale }) => {
+const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
   const earthPositionRef = useRef(new THREE.Vector3(12, 0, 0)); // Create a referenfe to Earth's position vector
 
@@ -51,6 +51,6 @@ const Earth = ({ displacementScale }) => {
     <Moon />
     </group>
   );
-}
+});
 
 export default Earth;

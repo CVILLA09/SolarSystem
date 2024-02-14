@@ -1,8 +1,8 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
-const Moon = () => {
+const Moon = React.memo(() => {
   const moonRef = useRef()
 
     const [moonTexture] = useTexture(['/assets/moon.jpg']);
@@ -28,6 +28,6 @@ const Moon = () => {
           />
     </mesh>
   );
-}
+});
 
 export default Moon;
