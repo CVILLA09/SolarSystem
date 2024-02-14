@@ -1,20 +1,24 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
+import * as THREE from 'three';
 
 const Moon = React.memo(() => {
   const moonRef = useRef()
+  const clockRef = useRef(new THREE.Clock());
 
     const [moonTexture] = useTexture(['/assets/moon.jpg']);
 
     const xAxis = 4
-    useFrame (({clock}) => {
+    const updateMoonPosition = useCallback(() => {
       // Orbit Rotation
-      moonRef.current.position.x = Math.sin(clock.getElapsedTime() * 0.4) * xAxis
-      moonRef.current.position.z = Math.cos(clock.getElapsedTime() * 0.4) * xAxis
+      moonRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 0.4) * xAxis
+      moonRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * 0.4) * xAxis
       // Axis Rotation 
       moonRef.current.rotation.y += 0.001
-    })
+    }, [])
+
+    useFrame (() => {updateMoonPosition()})
 
   return (
     <mesh castShadow receiveShadow ref={moonRef} position={[xAxis,0,0]}>

@@ -22,7 +22,7 @@ const Earth = React.memo (({ displacementScale }) => {
 
     const updateEarthPosition = useCallback(() => {
       // Calculate the Earth's position based on its angle from the Sun
-      const angle = clockRef.getElapsedTime() * 0.4;
+      const angle = clockRef.current.getElapsedTime() * 0.4;
       const distance = 12;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
