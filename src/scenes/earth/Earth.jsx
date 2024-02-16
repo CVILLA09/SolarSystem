@@ -55,7 +55,7 @@ const Earth = React.memo (({ displacementScale }) => {
           displacementScale={displacementScale}
           emissiveMap={earthEmissiveMap}
           emissive={0xffffff}
-          emissiveIntensity={1.5}
+          emissiveIntensity={hovered ? 20 : 1.5}
           />
     </mesh>
     <ISS />
