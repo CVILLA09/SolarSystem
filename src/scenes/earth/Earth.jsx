@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import Moon from "./Moon";
 import ISS from "./ISS";
 
@@ -10,6 +10,8 @@ const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
   const earthPositionRef = useRef(new THREE.Vector3(12, 0, 0)); // Create a referenfe to Earth's position vector
   const clockRef = useRef(new THREE.Clock());
+
+  const [hovered, hover] = useState(false);
 
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
     useTexture([
@@ -31,11 +33,17 @@ const Earth = React.memo (({ displacementScale }) => {
       earthPositionRef.current = earthRef.current.position;
     }, [])
 
+    useEffect(() => {
+      document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    }, [hovered])
+
     useFrame (() => {updateEarthPosition()})
 
   return (
     <group ref={earthRef}>
-    <mesh castShadow receiveShadow>
+    <mesh castShadow receiveShadow 
+          onPointerOver={() => hover(true)} 
+          onPointerOut={() => hover(false)} >
         {/* Radius, X-axis, Y-axis  */}
         <sphereGeometry args={[1, 64, 64]} />
           <meshPhongMaterial 
