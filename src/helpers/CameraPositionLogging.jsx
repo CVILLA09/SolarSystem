@@ -1,4 +1,4 @@
-import { useThree } from 'react-three-fiber';
+import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from 'react';
 
 function CameraPositionLogging({event}) {
@@ -8,16 +8,18 @@ function CameraPositionLogging({event}) {
   useEffect(() => {
     const logCameraPosition = () => {
       const { x, y, z } = cameraRef.current.position
-        console.log(`Camera Position: x: ${x}, y: ${y}, z: ${z}`);
+      const roundX = Math.round(x * 100) / 100;
+        const roundY = Math.round(y * 100) / 100;
+        const roundZ = Math.round(z * 100) / 100;
+        console.log(`Camera Position: x: ${roundX}, y: ${roundY}, z: ${roundZ}`);
     }
 
-    cameraRef.current = camera;
+    cameraRef.current = camera
     window.addEventListener(event, logCameraPosition);
 
     return () => {
-      window.removeEventListener(event, logCameraPosition);
+      window.removeEventListener(event, logCameraPosition)
     }
-
   }, [])
 
   return null;
