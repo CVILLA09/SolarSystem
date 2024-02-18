@@ -64,8 +64,7 @@ const Earth = React.memo (({ displacementScale }) => {
       document.body.style.cursor = hovered ? 'pointer' : 'auto';
     }, [hovered])
 
-    useFrame(() => {
-      updateEarthPosition();
+    const tweenLogic = useCallback(() => {
       TWEEN.update();
     
       if (followingEarth) {
@@ -106,6 +105,11 @@ const Earth = React.memo (({ displacementScale }) => {
           })
           .start();
       }
+    });
+
+    useFrame(() => {
+      updateEarthPosition();
+      tweenLogic();
     });    
 
   return (
