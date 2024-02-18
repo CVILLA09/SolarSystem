@@ -31,24 +31,28 @@ const Earth = React.memo (({ displacementScale }) => {
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
       earthRef.current.rotation.y += 0.01
-      
     }, [])
 
     const toggleFollowingEarth = () => {
-      setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth);
+      setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth)
     }
 
     useEffect(() => {
       document.body.style.cursor = hovered ? 'pointer' : 'auto';
     }, [hovered])
 
-    useFrame ((camera) => {
+    useFrame (({camera}) => {
       updateEarthPosition()
-
       const earthPositionRef = earthRef.current.position;
+      const cameraTargetPosition = new THREE.Vector3(
+        earthPositionRef.x + 10, 
+        earthPositionRef.y + 2, 
+        earthPositionRef.z + 5
+        );
 
       if (followingEarth) {
-       camera.lookAt(earthPositionRef);
+       camera.lookAt(earthPositionRef)
+        camera.position.copy(cameraTargetPosition)
       }
     })
 
