@@ -12,7 +12,7 @@ function App() {
     position: [16, 8.5, 19.5] }}>
        {/* <Perf /> */}
       <color attach="background" args={['black']} />
-      <OrbitControls />
+      {/* <OrbitControls /> */}
       <MainContainer />
     </Canvas>
   )
