@@ -40,67 +40,73 @@ const Earth = React.memo (({ displacementScale }) => {
       earthRef.current.rotation.y += 0.01
     }, [])
 
+    const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81);
+    const originalCameraTarget = new THREE.Vector3(0, 0, 0);
+
     const toggleFollowingEarth = () => {
-      setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth)
-    }
+      setFollowingEarth((prevFollowingEarth) => {
+        if (!prevFollowingEarth) {
+         // When starting to follow the Earth, set the camera position and target
+         // to their current values (so the tween starts from the correct place)
+         setCameraPosition(camera.position.clone());
+         setCameraTarget(cameraTarget);
+        } else {
+         // When stopping following the Earth, reset the camera position and target
+         // to their original values
+         setCameraPosition(originalCameraPosition);
+         setCameraTarget(originalCameraTarget);
+        }
+      return !prevFollowingEarth;
+     });
+    };
 
     useEffect(() => {
       document.body.style.cursor = hovered ? 'pointer' : 'auto';
     }, [hovered])
 
-    useFrame (() => {
-      updateEarthPosition()
-      TWEEN.update()
-      const earthPositionRef = earthRef.current.position;
-
+    useFrame(() => {
+      updateEarthPosition();
+      TWEEN.update();
+    
       if (followingEarth) {
+        const earthPositionRef = earthRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
-          earthPositionRef.x + 10, 
-          earthPositionRef.y + 2, 
+          earthPositionRef.x + 10,
+          earthPositionRef.y + 2,
           earthPositionRef.z + 5
-          );
-        
+        );
+    
         // Tween for camera position
-        new TWEEN.Tween(cameraPosition)
-        .to(cameraTargetPosition, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraPosition(cameraPosition)
-        })
-        .start()
+        new TWEEN.Tween(camera.position)
+          .to(cameraTargetPosition, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
+    
         // Tween for camera target
         new TWEEN.Tween(cameraTarget)
-        .to(earthPositionRef, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraTarget(cameraTarget)
-        })
-        .start()
-        
-        camera.lookAt(cameraTarget)
-        camera.position.copy(cameraPosition)
-        camera.updateProjectionMatrix()
+          .to(earthPositionRef, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate((newTarget) => {
+            camera.lookAt(newTarget);
+          })
+          .start();
       } else {
-        const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
-        const originalCameraTarget = new THREE.Vector3(0, 0, 0)
         // Tween for original camera position
-        new TWEEN.Tween(cameraPosition)
+        new TWEEN.Tween(camera.position)
           .to(originalCameraPosition, 1000)
           .easing(TWEEN.Easing.Quadratic.Out)
-          .onUpdate(() => {
-            setCameraPosition(cameraPosition)
-        })
-        .start()
+          .start();
+    
         // Tween for original camera target
         new TWEEN.Tween(cameraTarget)
           .to(originalCameraTarget, 1000)
           .easing(TWEEN.Easing.Quadratic.Out)
-          .onUpdate(() => {
-            setCameraTarget(cameraTarget)
-        })
-        .start()
+          .onUpdate((newTarget) => {
+            camera.lookAt(newTarget);
+          })
+          .start();
       }
-    })
+    });    
 
   return (
     <group ref={earthRef}>
