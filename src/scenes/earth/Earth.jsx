@@ -8,11 +8,16 @@ import * as THREE from 'three';
 
 const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
-  const earthPositionRef = useRef(new THREE.Vector3(12, 0, 0)); // Create a referenfe to Earth's position vector
   const clockRef = useRef(new THREE.Clock());
 
   const [hovered, hover] = useState(false);
   const [followingEarth, setFollowingEarth] = useState(false);
+  
+  const [cameraPosition, setCameraPosition] = useState(
+    new THREE.Vector3(16.14, 8.32, 19.81))
+
+  const [cameraTarget, setCameraTarget] = useState(
+    new THREE.Vector3(0, 0, 0))
 
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
     useTexture([
@@ -54,8 +59,6 @@ const Earth = React.memo (({ displacementScale }) => {
        camera.lookAt(earthPositionRef)
         camera.position.copy(cameraTargetPosition)
       } else {
-        const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
-        const originalCameraTarget = new THREE.Vector3(0, 0, 0)
         camera.lookAt(originalCameraTarget)
         camera.position.copy(originalCameraPosition)
       }
