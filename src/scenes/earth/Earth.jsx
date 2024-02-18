@@ -33,7 +33,7 @@ const Earth = React.memo (({ displacementScale }) => {
     const updateEarthPosition = useCallback(() => {
       // Calculate the Earth's position based on its angle from the Sun
       const angle = clockRef.current.getElapsedTime() * 0.4;
-      const distance = 12;
+      const distance = 14;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
@@ -59,6 +59,7 @@ const Earth = React.memo (({ displacementScale }) => {
           earthPositionRef.y + 2, 
           earthPositionRef.z + 5
           );
+        
         // Tween for camera position
         new TWEEN.Tween(cameraPosition)
         .to(cameraTargetPosition, 1000)
@@ -75,29 +76,29 @@ const Earth = React.memo (({ displacementScale }) => {
           setCameraTarget(cameraTarget)
         })
         .start()
+        
+        camera.lookAt(cameraTarget)
+        camera.position.copy(cameraPosition)
+        camera.updateProjectionMatrix()
       } else {
         const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
         const originalCameraTarget = new THREE.Vector3(0, 0, 0)
         // Tween for original camera position
         new TWEEN.Tween(cameraPosition)
-        .to(originalCameraPosition, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraPosition(cameraPosition)
+          .to(originalCameraPosition, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraPosition(cameraPosition)
         })
         .start()
         // Tween for original camera target
         new TWEEN.Tween(cameraTarget)
-        .to(originalCameraTarget, 1000)
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .onUpdate(() => {
-          setCameraTarget(cameraTarget)
+          .to(originalCameraTarget, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(() => {
+            setCameraTarget(cameraTarget)
         })
         .start()
-
-        camera.lookAt(originalCameraTarget)
-        camera.position.copy(cameraPosition)
-        camera.updateProjectionMatrix()
       }
     })
 
