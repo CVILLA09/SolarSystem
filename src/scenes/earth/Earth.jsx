@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import Moon from "./Moon";
 import ISS from "./ISS";
@@ -12,6 +12,7 @@ const Earth = React.memo (({ displacementScale }) => {
   const clockRef = useRef(new THREE.Clock());
 
   const [hovered, hover] = useState(false);
+  const [followingEarth, setFollowingEarth] = useState(false);
 
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
     useTexture([
@@ -30,18 +31,31 @@ const Earth = React.memo (({ displacementScale }) => {
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
       earthRef.current.rotation.y += 0.01
-      earthPositionRef.current = earthRef.current.position;
+      
     }, [])
+
+    const toggleFollowingEarth = () => {
+      setFollowingEarth((prevFollowingEarth) => !prevFollowingEarth);
+    }
 
     useEffect(() => {
       document.body.style.cursor = hovered ? 'pointer' : 'auto';
     }, [hovered])
 
-    useFrame (() => {updateEarthPosition()})
+    useFrame ((camera) => {
+      updateEarthPosition()
+
+      const earthPositionRef = earthRef.current.position;
+
+      if (followingEarth) {
+       camera.lookAt(earthPositionRef);
+      }
+    })
 
   return (
     <group ref={earthRef}>
     <mesh castShadow receiveShadow 
+          onClick={toggleFollowingEarth}
           onPointerOver={() => hover(true)} 
           onPointerOut={() => hover(false)} >
         {/* Radius, X-axis, Y-axis  */}
