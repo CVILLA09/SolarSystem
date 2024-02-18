@@ -5,6 +5,7 @@ import Moon from "./Moon";
 import ISS from "./ISS";
 
 import * as THREE from 'three';
+import * as TWEEN from '@tweenjs/tween.js';
 
 const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
@@ -56,9 +57,42 @@ const Earth = React.memo (({ displacementScale }) => {
         );
 
       if (followingEarth) {
-       camera.lookAt(earthPositionRef)
-        camera.position.copy(cameraTargetPosition)
+        // Tween for camera position
+        new TWEEN.Tween(cameraPosition)
+        .to(cameraTargetPosition, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onUpdate(() => {
+          setCameraPosition(cameraPosition)
+        })
+        .start()
+        // Tween for camera target
+        new TWEEN.Tween(cameraTarget)
+        .to(earthPositionRef, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onUpdate(() => {
+          setCameraTarget(cameraTarget)
+        })
+        .start()
       } else {
+        const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81)
+        const originalCameraTarget = new THREE.Vector3(0, 0, 0)
+        // Tween for original camera position
+        new TWEEN.Tween(cameraPosition)
+        .to(originalCameraPosition, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onUpdate(() => {
+          setCameraPosition(cameraPosition)
+        })
+        .start()
+        // Tween for original camera target
+        new TWEEN.Tween(cameraTarget)
+        .to(originalCameraTarget, 1000)
+        .easing(TWEEN.Easing.Quadratic.Out)
+        .onUpdate(() => {
+          setCameraTarget(cameraTarget)
+        })
+        .start()
+
         camera.lookAt(originalCameraTarget)
         camera.position.copy(originalCameraPosition)
       }
