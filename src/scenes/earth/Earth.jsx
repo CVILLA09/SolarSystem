@@ -10,6 +10,7 @@ import * as TWEEN from '@tweenjs/tween.js';
 const Earth = React.memo (({ displacementScale }) => {
   const earthRef = useRef()
   const clockRef = useRef(new THREE.Clock());
+  const { camera } = useThree();
 
   const [hovered, hover] = useState(false);
   const [followingEarth, setFollowingEarth] = useState(false);
@@ -47,16 +48,17 @@ const Earth = React.memo (({ displacementScale }) => {
       document.body.style.cursor = hovered ? 'pointer' : 'auto';
     }, [hovered])
 
-    useFrame (({camera}) => {
+    useFrame (() => {
       updateEarthPosition()
+      TWEEN.update()
       const earthPositionRef = earthRef.current.position;
-      const cameraTargetPosition = new THREE.Vector3(
-        earthPositionRef.x + 10, 
-        earthPositionRef.y + 2, 
-        earthPositionRef.z + 5
-        );
 
       if (followingEarth) {
+        const cameraTargetPosition = new THREE.Vector3(
+          earthPositionRef.x + 10, 
+          earthPositionRef.y + 2, 
+          earthPositionRef.z + 5
+          );
         // Tween for camera position
         new TWEEN.Tween(cameraPosition)
         .to(cameraTargetPosition, 1000)
@@ -94,7 +96,8 @@ const Earth = React.memo (({ displacementScale }) => {
         .start()
 
         camera.lookAt(originalCameraTarget)
-        camera.position.copy(originalCameraPosition)
+        camera.position.copy(cameraPosition)
+        camera.updateProjectionMatrix()
       }
     })
 
