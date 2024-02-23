@@ -34,7 +34,7 @@ const Mercury = React.memo (({ displacementScale }) => {
       mercuryRef.current.rotation.y += 0.006;
     }, [])
 
-    const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81);
+    const originalCameraPosition = new THREE.Vector3(20, 10, 25);
     const originalCameraTarget = new THREE.Vector3(0, 0, 0);
 
     const toggleFollowingMercury = () => {
@@ -113,12 +113,12 @@ const Mercury = React.memo (({ displacementScale }) => {
       onPointerOver={() => hover(true)} 
       onPointerOut={() => hover(false)} >
         {/* Radius, X-axis, Y-axis  */}
-        <sphereGeometry args={[.4, 64, 64]} />
+        <sphereGeometry args={[.4, 32, 32]} />
           <meshPhongMaterial 
           map={mercuryTexture}
           emissiveMap={mercuryTexture}
           emissive={0xffffff}
-          emissiveIntensity={hovered ? 0.5 : 0.001}
+          emissiveIntensity={hovered ? 0.75 : 0.01}
           />
     </mesh>
     </group>

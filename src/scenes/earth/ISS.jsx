@@ -11,11 +11,11 @@ const ISS = React.memo(() => {
         return useGLTF('/ISSModel/ISS_stationary.gltf');
     });
 
-    const xAxis = 2
+    const xAxis = 1.5
     const updateISSPosition = useCallback(() => {
         // Orbit Rotation
-        ISSRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * .9) * xAxis
-        ISSRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * .9) * xAxis
+        ISSRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * .8) * xAxis
+        ISSRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * .8) * xAxis
     }, [])
 
     useFrame (() => {
@@ -28,7 +28,7 @@ const ISS = React.memo(() => {
             ref={ISSRef}
             object={memoizedISS.scene} 
             position={[xAxis,0,0]} 
-            scale={0.003} />
+            scale={0.002} />
         </mesh>
     )
 });

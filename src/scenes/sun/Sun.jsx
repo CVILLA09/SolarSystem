@@ -34,8 +34,8 @@ const Sun = React.memo(() => {
           />
           <pointLight
             color={0xffffff}        // Specify the color of the light (optional)
-            intensity={25}           // Set the intensity of the light (optional)
-            distance={100}           // Set the maximum range of the light (optional)
+            intensity={40}           // Set the intensity of the light (optional)
+            distance={1000}           // Set the maximum range of the light (optional)
             decay={1}               // Set the amount the light dims along the distance (optional)
             position={[0, 0, 0]}    // Set the position of the light (optional)
             castShadow             // Set the light as a shadow-casting light (optional)

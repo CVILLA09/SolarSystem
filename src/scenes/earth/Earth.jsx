@@ -32,7 +32,7 @@ const Earth = React.memo (({ displacementScale }) => {
 
     const updateEarthPosition = useCallback(() => {
       // Calculate the Earth's position based on its angle from the Sun
-      const angle = clockRef.current.getElapsedTime() * 0.4;
+      const angle = clockRef.current.getElapsedTime() * 0.35;
       const distance = 20;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
@@ -40,7 +40,7 @@ const Earth = React.memo (({ displacementScale }) => {
       earthRef.current.rotation.y += 0.01
     }, [])
 
-    const originalCameraPosition = new THREE.Vector3(16.14, 8.32, 19.81);
+    const originalCameraPosition = new THREE.Vector3(20, 10, 25);
     const originalCameraTarget = new THREE.Vector3(0, 0, 0);
 
     const toggleFollowingEarth = () => {
@@ -70,9 +70,9 @@ const Earth = React.memo (({ displacementScale }) => {
       if (followingEarth) {
         const earthPositionRef = earthRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
-          earthPositionRef.x + 12,
-          earthPositionRef.y + 3,
-          earthPositionRef.z + 8
+          earthPositionRef.x + 28,
+          earthPositionRef.y + 5,
+          earthPositionRef.z + 10
         );
     
         // Tween for camera position

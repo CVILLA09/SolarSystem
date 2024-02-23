@@ -10,7 +10,7 @@ const Moon = React.memo(() => {
 
     const [moonTexture] = useTexture(['/assets/moon.jpg']);
 
-    const xAxis = 4
+    const xAxis = 3
     const updateMoonPosition = useCallback(() => {
       // Orbit Rotation
       moonRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 0.3) * xAxis
