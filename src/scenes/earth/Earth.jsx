@@ -16,10 +16,10 @@ const Earth = React.memo (({ displacementScale }) => {
   const [followingEarth, setFollowingEarth] = useState(false);
   
   const [cameraPosition, setCameraPosition] = useState(
-    new THREE.Vector3(16.14, 8.32, 19.81))
+    new THREE.Vector3(16, 8.5, 19.5))
 
   const [cameraTarget, setCameraTarget] = useState(
-    new THREE.Vector3(0, 0, 0))
+    new THREE.Vector3(0, 0, 20))
 
     const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
     useTexture([
@@ -70,9 +70,9 @@ const Earth = React.memo (({ displacementScale }) => {
       if (followingEarth) {
         const earthPositionRef = earthRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
-          earthPositionRef.x + 28,
-          earthPositionRef.y + 5,
-          earthPositionRef.z + 10
+          earthPositionRef.x + 5,
+          earthPositionRef.y + 1,
+          earthPositionRef.z + 5
         );
     
         // Tween for camera position

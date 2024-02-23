@@ -14,7 +14,7 @@ const Mercury = React.memo (({ displacementScale }) => {
   const [followingMercury, setFollowingMercury] = useState(false);
   
   const [cameraPosition, setCameraPosition] = useState(
-    new THREE.Vector3(16.14, 8.32, 19.81))
+    new THREE.Vector3(16, 8.5, 19.5))
 
   const [cameraTarget, setCameraTarget] = useState(
     new THREE.Vector3(0, 0, 0))
@@ -65,7 +65,7 @@ const Mercury = React.memo (({ displacementScale }) => {
         const mercuryPositionRef = mercuryRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
           mercuryPositionRef.x + 9,
-          mercuryPositionRef.y + 5,
+          mercuryPositionRef.y + 2,
           mercuryPositionRef.z + 5
         );
     
