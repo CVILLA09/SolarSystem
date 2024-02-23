@@ -7,6 +7,7 @@ import CameraPositionLogging from './helpers/CameraPositionLogging';
 
 import Earth from './scenes/earth/Earth';
 import Sun from './scenes/sun/Sun';
+import Mercury from './scenes/mercury/Mercury';
 
 const MainContainer = () => {
     return (
@@ -16,6 +17,7 @@ const MainContainer = () => {
                 <AnimatedStars />
                 <ambientLight intensity={0.005} />
                 <Sun />
+                <Mercury displacementScale={0.01}/>
                 <Earth displacementScale={0.03}/>
             </>
     );
