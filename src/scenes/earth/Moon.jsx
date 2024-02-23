@@ -13,8 +13,8 @@ const Moon = React.memo(() => {
     const xAxis = 3
     const updateMoonPosition = useCallback(() => {
       // Orbit Rotation
-      moonRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 0.3) * xAxis
-      moonRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * 0.3) * xAxis
+      moonRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 0.4) * xAxis
+      moonRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * 0.4) * xAxis
       // Axis Rotation 
       moonRef.current.rotation.y += 0.001
     }, [])

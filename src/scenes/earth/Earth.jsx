@@ -37,7 +37,7 @@ const Earth = React.memo (({ displacementScale }) => {
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
       earthRef.current.position.set(x, 0, z);
-      earthRef.current.rotation.y += 0.01
+      earthRef.current.rotation.y += 0.0004;
     }, [])
 
     const originalCameraPosition = new THREE.Vector3(20, 10, 25);
