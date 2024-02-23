@@ -12,16 +12,19 @@ const ISS = React.memo(() => {
     });
 
     const xAxis = 2
-    const updateMoonPosition = useCallback(() => {
+    const updateISSPosition = useCallback(() => {
         // Orbit Rotation
-        ISSRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * 1.2) * xAxis
-        ISSRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * 1.2) * xAxis
+        ISSRef.current.position.x = Math.sin(clockRef.current.getElapsedTime() * .9) * xAxis
+        ISSRef.current.position.z = Math.cos(clockRef.current.getElapsedTime() * .9) * xAxis
     }, [])
-    useFrame (() => {updateMoonPosition()})
+
+    useFrame (() => {
+        updateISSPosition()
+    })
 
     return(
         <mesh>
-            <primitive 
+          <primitive 
             ref={ISSRef}
             object={memoizedISS.scene} 
             position={[xAxis,0,0]} 
