@@ -1,9 +1,10 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState  } from "react";
 
 const Sun = React.memo(() => {
   const sunRef = useRef()
+  const [hovered, setHovered] = useState(false);
 
     const [sunTexture] = useTexture(['/assets/sun.jpg']);
 
@@ -12,14 +13,23 @@ const Sun = React.memo(() => {
       sunRef.current.rotation.y -= 0.001
     })
 
+    useEffect(() => {
+      document.body.style.cursor = hovered ? 'pointer' : 'auto';
+    }, [hovered]);    
+
   return (
-    <mesh ref={sunRef} position={[0,0,0]}>
+    <mesh 
+      ref={sunRef} 
+      position={[0,0,0]}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}  
+      >
         {/* Radius, X-axis, Y-axis  */}
         <sphereGeometry args={[2, 32, 32]} />
           <meshPhongMaterial 
           map={sunTexture} 
           emissiveMap={sunTexture} 
-          emissiveIntensity={0.5} 
+          emissiveIntensity={hovered ? 2 : 0.5}
           emissive={0xffffff} 
           />
           <pointLight
