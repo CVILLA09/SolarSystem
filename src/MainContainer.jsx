@@ -11,6 +11,7 @@ import Mercury from './scenes/mercury/Mercury';
 import Venus from './scenes/venus/Venus';
 import Mars from './scenes/mars/Mars';
 import Jupiter from './scenes/jupiter/Jupiter';
+import Saturn from './scenes/saturn/Saturn';
 
 const MainContainer = () => {
     return (
@@ -25,6 +26,7 @@ const MainContainer = () => {
                 <Earth displacementScale={0.03}/>
                 <Mars />
                 <Jupiter />
+                <Saturn />
             </>
     );
 }
