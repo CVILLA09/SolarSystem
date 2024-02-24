@@ -27,7 +27,7 @@ const Mars = React.memo (({ displacementScale }) => {
     const updateMarsPosition = useCallback(() => {
       // Calculate Mars's position based on its angle from the Sun
       const angle = clockRef.current.getElapsedTime() * 0.2;
-      const distance = 15;
+      const distance = 20;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
       marsRef.current.position.set(x, 0, z);

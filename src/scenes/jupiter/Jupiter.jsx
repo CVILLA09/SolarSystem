@@ -1,52 +1,46 @@
 import { useTexture } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import Moon from "./Moon";
-import ISS from "./ISS";
 
 import * as THREE from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
 
-const Earth = React.memo (({ displacementScale }) => {
-  const earthRef = useRef()
+const Jupiter = React.memo (({ displacementScale }) => {
+  const jupiterRef = useRef()
   const clockRef = useRef(new THREE.Clock());
   const { camera } = useThree();
 
   const [hovered, hover] = useState(false);
-  const [followingEarth, setFollowingEarth] = useState(false);
+  const [followingJupiter, setFollowingJupiter] = useState(false);
   
   const [cameraPosition, setCameraPosition] = useState(
     new THREE.Vector3(16, 8.5, 19.5))
 
   const [cameraTarget, setCameraTarget] = useState(
-    new THREE.Vector3(0, 0, 20))
+    new THREE.Vector3(0, 0, 0))
 
-    const [earthTexture, earthNormalMap, earthSpecularMap, earthDisplacementMap, earthEmissiveMap] = 
+    const [jupiterTexture] = 
     useTexture([
-      '/assets/earth_day.jpg', 
-      '/assets/earth_normal.jpg',
-      '/assets/earth_specular.jpg',
-      '/assets/earth_displacement.jpg',
-      '/assets/earth_night.jpg'
+      '/assets/jupiter.jpg', 
     ]);
 
-    const updateEarthPosition = useCallback(() => {
-      // Calculate the Earth's position based on its angle from the Sun
-      const angle = clockRef.current.getElapsedTime() * 0.35;
-      const distance = 15;
+    const updateJupiterPosition = useCallback(() => {
+      // Calculate Jupiter's position based on its angle from the Sun
+      const angle = clockRef.current.getElapsedTime() * 0.03;
+      const distance = 26;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
-      earthRef.current.position.set(x, 0, z);
-      earthRef.current.rotation.y += 0.01;
+      jupiterRef.current.position.set(x, 0, z);
+      jupiterRef.current.rotation.y += 0.02;
     }, [])
 
-    const originalCameraPosition = new THREE.Vector3(20, 10, 25);
+    const originalCameraPosition = new THREE.Vector3(30, 10, 25);
     const originalCameraTarget = new THREE.Vector3(0, 0, 0);
 
-    const toggleFollowingEarth = () => {
-      setFollowingEarth((prevFollowingEarth) => {
-        if (!prevFollowingEarth) {
-         // When starting to follow the Earth, set the camera position and target
+    const toggleFollowingJupiter = () => {
+      setFollowingJupiter((prevFollowingJupiter) => {
+        if (!prevFollowingJupiter) {
+         // When starting to follow Jupiter, set the camera position and target
          // to their current values (so the tween starts from the correct place)
          setCameraPosition(camera.position.clone());
          setCameraTarget(cameraTarget);
@@ -56,7 +50,7 @@ const Earth = React.memo (({ displacementScale }) => {
          setCameraPosition(originalCameraPosition);
          setCameraTarget(originalCameraTarget);
         }
-      return !prevFollowingEarth;
+      return !prevFollowingJupiter;
      });
     };
 
@@ -67,12 +61,12 @@ const Earth = React.memo (({ displacementScale }) => {
     const tweenLogic = useCallback(() => {
       TWEEN.update();
     
-      if (followingEarth) {
-        const earthPositionRef = earthRef.current.position;
+      if (followingJupiter) {
+        const jupiterPositionRef = jupiterRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
-          earthPositionRef.x + 5,
-          earthPositionRef.y + 1,
-          earthPositionRef.z + 5
+          jupiterPositionRef.x + 30,
+          jupiterPositionRef.y + 3,
+          jupiterPositionRef.z + 9
         );
     
         // Tween for camera position
@@ -83,7 +77,7 @@ const Earth = React.memo (({ displacementScale }) => {
     
         // Tween for camera target
         new TWEEN.Tween(cameraTarget)
-          .to(earthPositionRef, 1000)
+          .to(jupiterPositionRef, 1000)
           .easing(TWEEN.Easing.Quadratic.Out)
           .onUpdate((newTarget) => {
             camera.lookAt(newTarget);
@@ -108,34 +102,27 @@ const Earth = React.memo (({ displacementScale }) => {
     });
 
     useFrame(() => {
-      updateEarthPosition();
+      updateJupiterPosition();
       tweenLogic();
     });    
 
   return (
-    <group ref={earthRef}>
-    <mesh castShadow receiveShadow 
-          onClick={toggleFollowingEarth}
-          onPointerOver={() => hover(true)} 
-          onPointerOut={() => hover(false)} >
+    <group ref={jupiterRef}>
+    <mesh 
+      onClick={toggleFollowingJupiter}
+      onPointerOver={() => hover(true)} 
+      onPointerOut={() => hover(false)} >
         {/* Radius, X-axis, Y-axis  */}
-        <sphereGeometry args={[1, 64, 64]} />
+        <sphereGeometry args={[2, 32, 32]} />
           <meshPhongMaterial 
-          map={earthTexture} 
-          normalMap={earthNormalMap} 
-          specularMap={earthSpecularMap}
-          shininess={1000} 
-          displacementMap={earthDisplacementMap}
-          displacementScale={displacementScale}
-          emissiveMap={earthEmissiveMap}
+          map={jupiterTexture}
+          emissiveMap={jupiterTexture}
           emissive={0xffffff}
-          emissiveIntensity={hovered ? 20 : 1.5}
+          emissiveIntensity={hovered ? 0.75 : 0.01}
           />
     </mesh>
-    <ISS />
-    <Moon />
     </group>
   );
 });
 
-export default Earth;
+export default Jupiter;
