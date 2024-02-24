@@ -13,6 +13,7 @@ import Mars from './scenes/mars/Mars';
 import Jupiter from './scenes/jupiter/Jupiter';
 import Saturn from './scenes/saturn/Saturn';
 import Uranus from './scenes/uranus/Uranus';
+import Neptune from './scenes/neptune/Neptune';
 
 const MainContainer = () => {
     return (
@@ -29,6 +30,7 @@ const MainContainer = () => {
                 <Jupiter />
                 <Saturn />
                 <Uranus />
+                <Neptune />
             </>
     );
 }
