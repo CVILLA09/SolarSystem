@@ -24,9 +24,14 @@ const Saturn = React.memo (({ displacementScale }) => {
       '/assets/saturn.jpg', 
     ]);
 
+    const [saturnRingTexture] = 
+    useTexture([
+      '/assets/saturn-ring.png'
+    ]);
+
     const updateSaturnPosition = useCallback(() => {
       // Calculate Saturn's position based on its angle from the Sun
-      const angle = clockRef.current.getElapsedTime() * 0.012;
+      const angle = clockRef.current.getElapsedTime() * 0.2;
       const distance = 32;
       const x = Math.sin(angle) * distance;
       const z = Math.cos(angle) * distance;
@@ -64,7 +69,7 @@ const Saturn = React.memo (({ displacementScale }) => {
       if (followingSaturn) {
         const saturnPositionRef = saturnRef.current.position;
         const cameraTargetPosition = new THREE.Vector3(
-          saturnPositionRef.x + 30,
+          saturnPositionRef.x + 40,
           saturnPositionRef.y + 3,
           saturnPositionRef.z + 9
         );
@@ -120,6 +125,10 @@ const Saturn = React.memo (({ displacementScale }) => {
           emissive={0xffffff}
           emissiveIntensity={hovered ? 0.75 : 0.01}
           />
+    </mesh>
+    <mesh rotation-x={Math.PI / 2}>
+      <torusGeometry args={[3.5, 0.5, .5, 100]} />
+      <meshPhongMaterial map={saturnRingTexture} />
     </mesh>
     </group>
   );
