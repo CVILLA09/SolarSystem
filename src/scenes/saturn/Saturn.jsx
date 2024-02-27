@@ -26,7 +26,7 @@ const Saturn = React.memo (({ displacementScale }) => {
 
     const [saturnRingTexture] = 
     useTexture([
-      '/assets/saturn-ring.png'
+      '/assets/saturn_ring.jpg'
     ]);
 
     const updateSaturnPosition = useCallback(() => {
@@ -126,9 +126,18 @@ const Saturn = React.memo (({ displacementScale }) => {
           emissiveIntensity={hovered ? 0.75 : 0.01}
           />
     </mesh>
-    <mesh rotation-x={Math.PI / 2}>
+    <mesh 
+      onClick={toggleFollowingSaturn}
+      onPointerOver={() => hover(true)} 
+      onPointerOut={() => hover(false)}
+      rotation-x={Math.PI / 2}>
       <torusGeometry args={[3.5, 0.5, .5, 100]} />
-      <meshPhongMaterial map={saturnRingTexture} />
+      <meshPhongMaterial 
+      map={saturnRingTexture} 
+      emissiveMap={saturnRingTexture}
+      emissive={0xffffff}
+      emissiveIntensity={hovered ? 0.75 : 0.01}
+      />
     </mesh>
     </group>
   );
