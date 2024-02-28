@@ -131,12 +131,14 @@ const Saturn = React.memo (({ displacementScale }) => {
       onPointerOver={() => hover(true)} 
       onPointerOut={() => hover(false)}
       rotation-x={Math.PI / 2}>
-      <torusGeometry args={[3.5, 0.5, .5, 100]} />
+      <torusGeometry args={[3, 0.7, 2, 100]} />
       <meshPhongMaterial 
       map={saturnRingTexture} 
       emissiveMap={saturnRingTexture}
       emissive={0xffffff}
       emissiveIntensity={hovered ? 0.75 : 0.01}
+      transparent={true}
+      side={THREE.DoubleSide}
       />
     </mesh>
     </group>

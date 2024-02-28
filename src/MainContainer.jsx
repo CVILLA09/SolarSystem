@@ -21,7 +21,7 @@ const MainContainer = () => {
                 <Perf />
                 <CameraPositionLogging event="mousedown" />
                 <AnimatedStars />
-                <ambientLight intensity={0.005} />
+                <ambientLight intensity={0.02} />
                 <Sun />
                 <Mercury />
                 <Venus />
